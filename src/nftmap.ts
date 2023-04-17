@@ -27,13 +27,16 @@ export class NftUserMap {
 
   async createUserMap(): Promise<Map<string, string>> {
     for (const nft of this.nfts) {
-      const res = await Utility.getRequest(
-        configuration().SHFYFT_BASE_URI + `/nft/read?network=devnet&token_address=${nft}`,
-        head,
-      );
-      this.nftUserMap.set(nft, res.result.owner);
+      try {
+        const res = await Utility.getRequest(
+          configuration().SHFYFT_BASE_URI + `/nft/read?network=devnet&token_address=${nft}`,
+          head,
+        );
+        this.nftUserMap.set(nft, res.result.owner);
+      } catch (err) {
+        this.nftUserMap.set(nft, '');
+      }
     }
-
     return this.nftUserMap;
   }
 
