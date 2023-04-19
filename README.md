@@ -43,6 +43,9 @@ $ npm run start:dev
 
 # production mode
 $ npm run start:prod
+
+# open local tunnel to your system to receive callback events
+$ ssh -R 80:localhost:3000 serveo.net
 ```
 
 ## Test
